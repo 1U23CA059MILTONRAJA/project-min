@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Issue Book | Digital Library</title>
+
+    <!-- CSS File (same folder as this HTML file) -->
+    <link rel="stylesheet" href="issue.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+
+        <div class="logo">
+             Digital Library
+        </div>
+
+        <nav>
+            <a href="../dashboard/dash.html">Dashboard</a>
+            <a href="../add book/addbook.html">Books</a>
+            <a href="../add member/addmember.html">Members</a>
+            <a href="../issuebooks/issue.html" class="active" aria-current="page">Issue Book</a>
+            <a href="../returnbook/return.html">Return Book</a>
+            <a href="../report/report.html">Reports</a>
+        </nav>
+
+        <a href="../login/login.html" class="logout-btn">Logout</a>
+
+    </header>
+
+
+    <!-- Main Container -->
+    <main class="container">
+
+        <!-- Page Heading -->
+        <section class="page-heading">
+
+            <div>
+                <p class="subtitle">LIBRARY MANAGEMENT SYSTEM</p>
+                <h1>Issue a Book</h1>
+                <p class="description">
+                    Issue books to library members and manage borrowing records.
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- Issue Book Form -->
+        <section class="card">
+
+            <div class="card-heading">
+                <h2>📖 Issue Book Details</h2>
+                <p>Fill in the details below to issue a book.</p>
+            </div>
+
+            <!-- novalidate: JavaScript shows all error messages in the message box below,
+                 instead of the browser showing its own pop-up for empty fields -->
+            <form id="issueForm" novalidate>
+
+                <div class="form-grid">
+
+                    <!-- Member Selection -->
+                    <div class="form-group">
+
+                        <label for="memberSelect">
+                            Select Member <span>*</span>
+                        </label>
+
+                        <select id="memberSelect" name="memberId" required>
+                            <option value="">Select Member</option>
+                        </select>
+
+                    </div>
+
+
+                    <!-- Book Selection -->
+                    <div class="form-group">
+
+                        <label for="bookSelect">
+                            Select Book <span>*</span>
+                        </label>
+
+                        <select id="bookSelect" name="bookId" required>
+                            <option value="">Select Book</option>
+                        </select>
+
+                        <small>Only books with copies available are listed.</small>
+
+                    </div>
+
+
+                    <!-- Issue Date -->
+                    <div class="form-group">
+
+                        <label for="issueDate">
+                            Issue Date <span>*</span>
+                        </label>
+
+                        <input
+                            type="date"
+                            id="issueDate"
+                            name="issueDate"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Return Date -->
+                    <div class="form-group">
+
+                        <label for="returnDate">
+                            Expected Return Date <span>*</span>
+                        </label>
+
+                        <input
+                            type="date"
+                            id="returnDate"
+                            name="returnDate"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Message Box -->
+                <div id="issueFormMessage" class="message" role="status" aria-live="polite"></div>
+
+
+                <!-- Form Buttons -->
+                <div class="form-buttons">
+
+                    <button type="reset" class="reset-btn">
+                        Reset
+                    </button>
+
+                    <button type="submit" class="submit-btn">
+                        Issue Book
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- Issue Records Table -->
+        <section class="card records-card">
+
+            <div class="card-heading records-heading">
+
+                <div>
+                    <h2>📋 Issue Records</h2>
+                    <p>View the books issued to library members.</p>
+                </div>
+
+                <span class="record-label">Issue History</span>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Issue ID</th>
+                            <th scope="col">Member Name</th>
+                            <th scope="col">Book Name</th>
+                            <th scope="col">Issue Date</th>
+                            <th scope="col">Return Date</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="issueTableBody">
+
+                        <tr>
+                            <td colspan="6">Loading issue records...</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Digital Library Management System</p>
+    </footer>
+
+
+    <script src="issue.js"></script>
+
+</body>
+
+</html>

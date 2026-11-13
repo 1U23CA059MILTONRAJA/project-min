@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return Book Reports | Digital Library</title>
+
+    <!-- Shared navbar file first, then this page's CSS, so return.css has the final say -->
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="return.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar" aria-label="Main navigation">
+        <div class="logo"> Digital Library</div>
+
+        <div class="nav-links">
+            <a href="../dashboard/dash.html">Dashboard</a>
+            <a href="../add book/addbook.html">Books</a>
+            <a href="../add member/addmember.html">Members</a>
+            <a href="../issuebooks/issue.html">Issue Book</a>
+            <a href="../returnbook/return.html" class="active" aria-current="page">Return Book</a>
+            <a href="../report/report.html">Reports</a>
+            <a href="../about/about.html">About</a>
+            <a href="../login/login.html" class="logout-link">Logout</a>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <!-- Page Heading -->
+        <section class="page-heading">
+            <p class="subtitle">LIBRARY MANAGEMENT SYSTEM</p>
+            <h1>Return Book</h1>
+            <p class="description">Return issued books and keep the library records up to date.</p>
+        </section>
+
+        <!-- Messages are written here by return.js (it adds the class "success" or "error") -->
+        <p id="message" role="status" aria-live="polite"></p>
+
+        <!-- Issued Books Table -->
+        <section class="card" aria-labelledby="issuedTitle">
+            <div class="card-heading">
+                <h2 id="issuedTitle">📋 Issued Books</h2>
+                <p>Click Return when a member brings a book back.</p>
+            </div>
+
+            <div class="table-box">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Issue ID</th>
+                            <th scope="col">Member Name</th>
+                            <th scope="col">Book Name</th>
+                            <th scope="col">Issue Date</th>
+                            <th scope="col">Return Date</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="returnTable"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Library Reports -->
+        <section aria-labelledby="reportsTitle">
+            <h2 class="section-title" id="reportsTitle">Library Reports</h2>
+
+            <div class="report-container">
+                <div class="report-card">
+                    <h3>Total Books</h3>
+                    <p id="totalBooks">0</p>
+                </div>
+
+                <div class="report-card">
+                    <h3>Total Members</h3>
+                    <p id="totalMembers">0</p>
+                </div>
+
+                <div class="report-card">
+                    <h3>Available Books</h3>
+                    <p id="availableBooks">0</p>
+                </div>
+
+                <div class="report-card">
+                    <h3>Issued Books</h3>
+                    <p id="issuedCount">0</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Digital Library Management System</p>
+    </footer>
+
+    <script src="return.js"></script>
+</body>
+</html>

@@ -1,0 +1,538 @@
+/* ==========================================================
+   Issue Book page - Dark navy and gold theme
+   Same class names as before, so issuebook.html and issue.js need NO changes.
+   Colours are CSS variables: change them in one place (section 1).
+   ========================================================== */
+
+/* =========================
+   1. COLOUR VARIABLES
+========================= */
+
+:root {
+    --navy: #0a1428;
+    --charcoal: #161d2b;
+    --charcoal-light: #1f2838;
+    --gold: #e0a43a;
+    --gold-dark: #c78a1f;
+    --white: #ffffff;
+    --text: #e6eaf2;
+    --muted: #9aa3b5;
+    --border: rgba(255, 255, 255, 0.14);
+    --error: #ff8a80;
+    --success: #6fdc9b;
+}
+
+
+/* =========================
+   2. BASE
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--navy);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================
+   3. NAVBAR
+========================= */
+
+.navbar {
+    background-color: var(--charcoal);
+    min-height: 75px;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    border-bottom: 3px solid var(--gold);
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.35);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--gold);
+    white-space: nowrap;
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.navbar nav a {
+    text-decoration: none;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 12px;
+    border-radius: 7px;
+    transition: 0.3s;
+}
+
+.navbar nav a:hover,
+.navbar nav a.active {
+    background-color: rgba(224, 164, 58, 0.18);
+    color: var(--gold);
+}
+
+.logout-btn {
+    text-decoration: none;
+    color: var(--gold);
+    border: 1.5px solid var(--gold);
+    padding: 10px 17px;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.logout-btn:hover {
+    background-color: var(--gold);
+    color: var(--navy);
+}
+
+
+/* =========================
+   4. MAIN CONTAINER
+========================= */
+
+.container {
+    width: 90%;
+    max-width: 1250px;
+    margin: 35px auto;
+    flex: 1;
+}
+
+
+/* =========================
+   5. PAGE HEADING
+========================= */
+
+.page-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.subtitle {
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.page-heading h1 {
+    font-size: 32px;
+    color: var(--white);
+    margin-bottom: 10px;
+}
+
+.description {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   6. CARD DESIGN
+========================= */
+
+.card {
+    background-color: var(--charcoal);
+    padding: 28px;
+    border-radius: 14px;
+    margin-bottom: 28px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+}
+
+.card-heading {
+    margin-bottom: 25px;
+}
+
+.card-heading h2 {
+    font-size: 21px;
+    color: var(--white);
+    margin-bottom: 8px;
+}
+
+.card-heading p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   7. FORM GRID
+========================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.form-group label span {
+    color: var(--gold);
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    height: 46px;
+    padding: 0 13px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--navy);
+    color: var(--white);
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group input[type="date"] {
+    color-scheme: dark;            /* makes the calendar icon visible on dark backgrounds */
+}
+
+.form-group select option {
+    background-color: var(--navy);
+    color: var(--white);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(224, 164, 58, 0.3);
+}
+
+.form-group small {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+
+/* =========================
+   8. MESSAGE BOX
+========================= */
+
+.message {
+    display: none;
+    padding: 12px 15px;
+    margin-top: 22px;
+    border-radius: 7px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.message.success {
+    display: block;
+    background-color: rgba(111, 220, 155, 0.12);
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+.message.error {
+    display: block;
+    background-color: rgba(255, 138, 128, 0.12);
+    color: var(--error);
+    border: 1px solid var(--error);
+}
+
+
+/* =========================
+   9. FORM BUTTONS
+========================= */
+
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.form-buttons button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.reset-btn {
+    background-color: transparent;
+    color: var(--text);
+    border: 1.5px solid var(--border);
+}
+
+.reset-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+.submit-btn {
+    background-color: var(--gold);
+    color: var(--navy);
+}
+
+.submit-btn:hover {
+    background-color: var(--gold-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(224, 164, 58, 0.35);
+}
+
+/* Shown while a submission is being processed (prevents double clicks) */
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+
+/* =========================
+   10. ISSUE RECORDS
+========================= */
+
+.records-card {
+    padding-bottom: 20px;
+}
+
+.records-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.record-label {
+    background-color: rgba(224, 164, 58, 0.15);
+    color: var(--gold);
+    padding: 9px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+
+/* =========================
+   11. TABLE
+========================= */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 750px;
+}
+
+thead {
+    background-color: var(--gold);
+}
+
+th {
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: bold;
+    text-align: left;
+    padding: 16px 14px;
+    white-space: nowrap;
+}
+
+td {
+    padding: 16px 14px;
+    font-size: 13px;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+    overflow-wrap: anywhere;       /* long names wrap instead of stretching the table */
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+tbody tr:hover {
+    background-color: rgba(224, 164, 58, 0.08);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody td[colspan="6"] {
+    text-align: center;
+    padding: 30px;
+    color: var(--muted);
+}
+
+/* Status label (text is always shown, so it never relies on colour alone) */
+.status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    border: 1px solid var(--muted);
+    color: var(--muted);
+}
+
+.status-badge.status-issued {
+    color: var(--gold);
+    border-color: var(--gold);
+}
+
+.status-badge.status-returned {
+    color: var(--success);
+    border-color: var(--success);
+}
+
+
+/* =========================
+   12. KEYBOARD FOCUS
+========================= */
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+}
+
+
+/* =========================
+   13. FOOTER
+========================= */
+
+footer {
+    background-color: var(--charcoal);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 20px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+
+/* =========================
+   14. RESPONSIVE DESIGN
+========================= */
+
+@media screen and (max-width: 1000px) {
+
+    .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .navbar nav {
+        order: 3;
+        width: 100%;
+    }
+
+    .container {
+        width: 94%;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+
+    .navbar {
+        padding: 18px 4%;
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 19px;
+    }
+
+    .navbar nav {
+        gap: 5px;
+    }
+
+    .navbar nav a {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .container {
+        width: 92%;
+        margin: 25px auto;
+    }
+
+    .page-heading h1 {
+        font-size: 26px;
+    }
+
+    .description {
+        font-size: 14px;
+    }
+
+    .card {
+        padding: 18px;
+        border-radius: 10px;
+    }
+
+    .card-heading h2 {
+        font-size: 18px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .form-buttons {
+        flex-direction: column-reverse;
+    }
+
+    .form-buttons button {
+        width: 100%;
+    }
+
+    .records-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}

@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports & Analytics - Digital Library Management System</title>
+    <!-- Google Fonts: Poppins (Exact project font standard) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./report.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+        <div class="logo">
+            DIGITAL LIBRARY
+        </div>
+
+        <div class="nav-links">
+            <a href="../dashboard/dash.html">Dashboard</a>
+            <a href="../add book/addbook.html">Books</a>
+            <a href="../add member/addmember.html">Members</a>
+            <a href="../issuebooks/issue.html">Issue Book</a>
+            <a href="../returnbook/return.html">Return Book</a>
+            <a href="../report/report.html" class="active-link">Reports</a>
+            <a href="../about/about.html">About</a>
+            <a href="../login/login.html" onclick="logout()" class="logout-btn">Logout</a>
+        </div>
+    </nav>
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="container">
+        <section id="reportsSection" class="content-section">
+
+            <!-- PAGE HEADER -->
+            <div class="section-header">
+                <div class="header-text">
+                    <h1>Reports & Analytics</h1>
+                    <p>Comprehensive month-wise transaction reports, circulation trends, member activity, and complete transaction history.</p>
+                </div>
+
+                <div class="header-actions">
+                    <button type="button" class="action-btn secondary-btn" onclick="exportCurrentReportToCSV()" title="Export currently viewed report to CSV file">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Export CSV
+                    </button>
+                    <button type="button" class="action-btn secondary-btn" onclick="printReport()" title="Print complete library report">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                            <rect x="6" y="14" width="12" height="8"></rect>
+                        </svg>
+                        Print Report
+                    </button>
+                    <a href="../issuebooks/issue.html" class="action-link-btn" title="Create new book loan">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Issue Book
+                    </a>
+                </div>
+            </div>
+
+            <!-- EXECUTIVE STATS CARDS GRID -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon total-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Transactions</span>
+                        <h2 id="kpiTotalTransactions">0</h2>
+                        <span class="stat-sub">Lifetime issue & return records</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon issue-stat-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Issued</span>
+                        <h2 id="kpiTotalIssued">0</h2>
+                        <span class="stat-sub">Books loaned to members</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon returned-stat-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Returned</span>
+                        <h2 id="kpiTotalReturned">0</h2>
+                        <span class="stat-sub">Successfully restocked to shelf</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon overdue-stat-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Active & Overdue</span>
+                        <h2 id="kpiOverdueActive">0</h2>
+                        <span class="stat-sub" id="kpiOverdueSub">0 overdue &bull; 0 active</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= REPORT NAVIGATION TABS ================= -->
+            <div class="report-nav-tabs">
+                <button type="button" class="tab-btn active" data-tab="tab-month-wise" onclick="switchReportTab('tab-month-wise')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    Month-wise Transactions
+                </button>
+
+                <button type="button" class="tab-btn" data-tab="tab-history" onclick="switchReportTab('tab-history')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 14 14"></polyline>
+                        <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"></path>
+                    </svg>
+                    Transaction History & Audit
+                </button>
+
+                <button type="button" class="tab-btn" data-tab="tab-book-circulation" onclick="switchReportTab('tab-book-circulation')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                    </svg>
+                    Book Circulation & Stock
+                </button>
+
+                <button type="button" class="tab-btn" data-tab="tab-member-activity" onclick="switchReportTab('tab-member-activity')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    Member Borrowing Report
+                </button>
+
+                <button type="button" class="tab-btn" data-tab="tab-overdue-report" onclick="switchReportTab('tab-overdue-report')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    Overdue & Defaulters
+                </button>
+            </div>
+
+            <!-- ================= TAB 1: MONTH-WISE REPORT ================= -->
+            <div id="tab-month-wise" class="tab-panel active-panel">
+
+                <!-- Filter Controls -->
+                <div class="report-filter-bar">
+                    <div class="filter-bar-header">
+                        <div class="filter-bar-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7055e8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                            </svg>
+                            Month-wise Transaction Filter
+                        </div>
+                    </div>
+
+                    <div class="filter-bar-controls">
+                        <div class="filter-control-group">
+                            <label for="monthSelect">Select Month</label>
+                            <select id="monthSelect" class="filter-select" onchange="onMonthFilterChange()">
+                                <option value="all">All Months (Aggregate View)</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-control-group">
+                            <label for="monthStatusFilter">Transaction Status</label>
+                            <select id="monthStatusFilter" class="filter-select" onchange="onMonthFilterChange()">
+                                <option value="all">All Statuses</option>
+                                <option value="issued">Issued (Active Loans)</option>
+                                <option value="returned">Returned Books</option>
+                                <option value="overdue">Overdue Loans</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Quick Month Pills -->
+                    <div class="quick-filter-pills" id="monthPillsContainer">
+                        <!-- Populated dynamically by JS -->
+                    </div>
+                </div>
+
+                <!-- Monthly Metrics Mini Grid -->
+                <div class="mini-stats-grid">
+                    <div class="mini-stat-card">
+                        <span class="mini-stat-title">Month Volume</span>
+                        <div class="mini-stat-val" id="mStatTotalVolume">0</div>
+                        <span class="mini-stat-desc">Issues & Returns</span>
+                    </div>
+
+                    <div class="mini-stat-card">
+                        <span class="mini-stat-title">Books Issued</span>
+                        <div class="mini-stat-val" style="color: #7055e8;" id="mStatIssues">0</div>
+                        <span class="mini-stat-desc">Loaned out</span>
+                    </div>
+
+                    <div class="mini-stat-card">
+                        <span class="mini-stat-title">Books Returned</span>
+                        <div class="mini-stat-val" style="color: #10b981;" id="mStatReturns">0</div>
+                        <span class="mini-stat-desc">Restocked</span>
+                    </div>
+
+                    <div class="mini-stat-card">
+                        <span class="mini-stat-title">Return Rate</span>
+                        <div class="mini-stat-val" style="color: #2563eb;" id="mStatReturnRate">0%</div>
+                        <span class="mini-stat-desc">Resolution %</span>
+                    </div>
+
+                    <div class="mini-stat-card">
+                        <span class="mini-stat-title">Overdue In Month</span>
+                        <div class="mini-stat-val" style="color: #ef4444;" id="mStatOverdue">0</div>
+                        <span class="mini-stat-desc">Past 15 days</span>
+                    </div>
+                </div>
+
+                <!-- Monthly Visual Comparison Bar Chart -->
+                
+
+                <!-- Month Transactions Table -->
+                <div class="table-box">
+                    <div class="table-header">
+                        <div class="table-header-title">
+                            <h3>Month Transactions Breakdown</h3>
+                            <span class="badge-count" id="monthTableCountBadge">0 Records</span>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Issue ID</th>
+                                    <th>Book Information</th>
+                                    <th>Member Details</th>
+                                    <th>Issue Date</th>
+                                    <th>Due Date</th>
+                                    <th>Return Date</th>
+                                    <th>Transaction Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="monthTableBody">
+                                <!-- Populated dynamically by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ================= TAB 2: TRANSACTION HISTORY & AUDIT ================= -->
+            <div id="tab-history" class="tab-panel">
+
+                <div class="report-filter-bar">
+                    <div class="filter-bar-header">
+                        <div class="filter-bar-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7055e8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 14 14"></polyline>
+                                <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"></path>
+                            </svg>
+                            Complete Transaction Audit Trail & History
+                        </div>
+                    </div>
+
+                    <div class="filter-bar-controls">
+                        <!-- Search Box -->
+                        <div class="search-box">
+                            <span class="search-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </span>
+                            <input type="text" id="historySearchInput" class="search-input" placeholder="Search by Issue ID, Book, Member, Dept..." oninput="onHistorySearchInput()">
+                            <button type="button" id="historyClearSearch" class="clear-search-btn" onclick="clearHistorySearch()">&times;</button>
+                        </div>
+
+                        <!-- Date Range From -->
+                        <div class="filter-control-group" style="min-width: 150px;">
+                            <label for="historyDateFrom">From Date</label>
+                            <input type="date" id="historyDateFrom" class="filter-date-input" onchange="onHistoryDateFilterChange()">
+                        </div>
+
+                        <!-- Date Range To -->
+                        <div class="filter-control-group" style="min-width: 150px;">
+                            <label for="historyDateTo">To Date</label>
+                            <input type="date" id="historyDateTo" class="filter-date-input" onchange="onHistoryDateFilterChange()">
+                        </div>
+
+                        <!-- Event Type Filter -->
+                        <div class="filter-control-group" style="min-width: 160px;">
+                            <label for="historyTypeFilter">Event Type</label>
+                            <select id="historyTypeFilter" class="filter-select" onchange="onHistoryTypeFilterChange()">
+                                <option value="all">All Events</option>
+                                <option value="issues">Issue Events</option>
+                                <option value="returns">Return Events</option>
+                                <option value="overdue">Overdue Loans</option>
+                            </select>
+                        </div>
+
+                        <!-- Reset Date Filter -->
+                        <div style="display: flex; align-items: flex-end;">
+                            <button type="button" class="action-btn secondary-btn" style="height: 44px;" onclick="resetHistoryDateFilter()" title="Clear date range">
+                                Reset Dates
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- History Table Box -->
+                <div class="table-box">
+                    <div class="table-header">
+                        <div class="table-header-title">
+                            <h3>Transaction Audit Ledger</h3>
+                            <span class="badge-count" id="historyTableCountBadge">0 Records</span>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Issue ID</th>
+                                    <th>Event Type</th>
+                                    <th>Book Information</th>
+                                    <th>Member Details</th>
+                                    <th>Issue Date</th>
+                                    <th>Due Date</th>
+                                    <th>Loan Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTableBody">
+                                <!-- Populated dynamically by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ================= TAB 3: BOOK CIRCULATION & STOCK ================= -->
+            <div id="tab-book-circulation" class="tab-panel">
+
+                <!-- Circulation KPIs -->
+                <div class="mini-stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 24px;">
+                    <div class="mini-stat-card">
+                        <span class="mini-stat-title">Catalog Titles</span>
+                        <div class="mini-stat-val" id="cStatTotalTitles">0</div>
+                        <span class="mini-stat-desc">Distinct book titles</span>
+                    </div>
+
+                    <div class="mini-stat-card">
+                        <span class="mini-stat-title">Total Stock Units</span>
+                        <div class="mini-stat-val" style="color: #7055e8;" id="cStatTotalUnits">0</div>
+                        <span class="mini-stat-desc">All copies owned</span>
+                    </div>
+
+                    <div class="mini-stat-card">
+                        <span class="mini-stat-title">Units on Loan</span>
+                        <div class="mini-stat-val" style="color: #2563eb;" id="cStatBorrowedUnits">0</div>
+                        <span class="mini-stat-desc">Currently with members</span>
+                    </div>
+
+                    <div class="mini-stat-card">
+                        <span class="mini-stat-title">Available on Shelf</span>
+                        <div class="mini-stat-val" style="color: #10b981;" id="cStatAvailableUnits">0</div>
+                        <span class="mini-stat-desc">Ready for issue</span>
+                    </div>
+                </div>
+
+                <!-- Two Column Grid: Popular Books & Category Distribution -->
+                <div class="two-col-grid">
+                    <div class="panel-card">
+                        <div class="panel-card-title">
+                            <span>Top 5 Most Borrowed Books</span>
+                            <span style="font-size: 12px; color: #7b8498; font-weight: normal;">Lifetime Loans</span>
+                        </div>
+                        <div class="popular-books-list" id="popularBooksContainer">
+                            <!-- Populated dynamically by JS -->
+                        </div>
+                    </div>
+
+                    <div class="panel-card">
+                        <div class="panel-card-title">
+                            <span>Library Circulation Rule</span>
+                            <span style="font-size: 12px; color: #7055e8; font-weight: 700;">15-Day Policy</span>
+                        </div>
+                        <div style="font-size: 13.5px; color: #475569; line-height: 1.7;">
+                            <p style="margin-bottom: 12px;">
+                                <strong>Default Loan Duration:</strong> Each member can borrow a book for up to <strong>15 days</strong> from the date of issue.
+                            </p>
+                            <p style="margin-bottom: 12px;">
+                                <strong>Automatic Restocking:</strong> When a book is processed as returned, its physical inventory count is automatically incremented by +1 back to the shelves.
+                            </p>
+                            <p>
+                                <strong>Overdue Policy:</strong> Books kept beyond 15 days enter the overdue log and incur a daily reminder notice with standard ₹5/day fine calculation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Full Book Circulation Table -->
+                <div class="table-box">
+                    <div class="table-header">
+                        <div class="table-header-title">
+                            <h3>Book Inventory & Circulation Status</h3>
+                            <span class="badge-count" id="bookCirculationCountBadge">0 Titles</span>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Book Title & Author</th>
+                                    <th>Category</th>
+                                    <th>ISBN</th>
+                                    <th>Total Stock</th>
+                                    <th>On Loan</th>
+                                    <th>In Stock</th>
+                                    <th>Times Borrowed</th>
+                                    <th>Stock Availability</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookCirculationTableBody">
+                                <!-- Populated dynamically by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ================= TAB 4: MEMBER BORROWING REPORT ================= -->
+            <div id="tab-member-activity" class="tab-panel">
+
+                <!-- Member Activity KPIs -->
+                <div class="mini-stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 24px;">
+                    <div class="mini-stat-card">
+                        <span class="mini-stat-title">Registered Members</span>
+                        <div class="mini-stat-val" id="mStatTotalMembers">0</div>
+                        <span class="mini-stat-desc">Library cardholders</span>
+                    </div>
+
+                    <div class="mini-stat-card">
+                        <span class="mini-stat-title">Active Borrowers</span>
+                        <div class="mini-stat-val" style="color: #7055e8;" id="mStatActiveBorrowers">0</div>
+                        <span class="mini-stat-desc">Currently holding books</span>
+                    </div>
+
+                    <div class="mini-stat-card">
+                        <span class="mini-stat-title">Books with Members</span>
+                        <div class="mini-stat-val" style="color: #2563eb;" id="mStatBooksWithMembers">0</div>
+                        <span class="mini-stat-desc">Total units checked out</span>
+                    </div>
+
+                    <div class="mini-stat-card">
+                        <span class="mini-stat-title">Top Department</span>
+                        <div class="mini-stat-val" style="font-size: 17px; color: #10b981;" id="mStatTopDept">-</div>
+                        <span class="mini-stat-desc">Most active borrowing dept</span>
+                    </div>
+                </div>
+
+                <!-- Department Breakdown Section -->
+                <div class="panel-card" style="margin-bottom: 24px;">
+                    <div class="panel-card-title">
+                        <span>Department Loan Distribution</span>
+                        <span style="font-size: 12px; color: #7b8498; font-weight: normal;">Total loans per academic department</span>
+                    </div>
+                    <div class="dept-badge-list" id="memberDeptContainer">
+                        <!-- Populated dynamically by JS -->
+                    </div>
+                </div>
+
+                <!-- Members Table -->
+                <div class="table-box">
+                    <div class="table-header">
+                        <div class="table-header-title">
+                            <h3>Member Borrowing Activity Ledger</h3>
+                            <span class="badge-count" id="memberActivityCountBadge">0 Members</span>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Member ID</th>
+                                    <th>Member Name</th>
+                                    <th>Department</th>
+                                    <th>Contact Info</th>
+                                    <th>Total Borrowed</th>
+                                    <th>Active Loans</th>
+                                    <th>Returned</th>
+                                    <th>Account Standing</th>
+                                </tr>
+                            </thead>
+                            <tbody id="memberActivityTableBody">
+                                <!-- Populated dynamically by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ================= TAB 5: OVERDUE & DEFAULTERS REPORT ================= -->
+            <div id="tab-overdue-report" class="tab-panel">
+
+                <!-- Overdue KPIs -->
+                <div class="mini-stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 24px;">
+                    <div class="mini-stat-card">
+                        <span class="mini-stat-title">Overdue Books</span>
+                        <div class="mini-stat-val" style="color: #ef4444;" id="oStatTotalOverdue">0</div>
+                        <span class="mini-stat-desc">Past 15-day limit</span>
+                    </div>
+
+                    <div class="mini-stat-card">
+                        <span class="mini-stat-title">Overdue Members</span>
+                        <div class="mini-stat-val" style="color: #f59e0b;" id="oStatOverdueMembers">0</div>
+                        <span class="mini-stat-desc">Members with late loans</span>
+                    </div>
+
+                    <div class="mini-stat-card">
+                        <span class="mini-stat-title">Total Overdue Days</span>
+                        <div class="mini-stat-val" style="color: #dc2626;" id="oStatTotalDays">0</div>
+                        <span class="mini-stat-desc">Cumulative days late</span>
+                    </div>
+
+                    <div class="mini-stat-card">
+                        <span class="mini-stat-title">Estimated Fine</span>
+                        <div class="mini-stat-val" style="color: #b91c1c;" id="oStatTotalFine">₹0</div>
+                        <span class="mini-stat-desc">At ₹5 / day rate</span>
+                    </div>
+                </div>
+
+                <!-- Overdue Table -->
+                <div class="table-box">
+                    <div class="table-header">
+                        <div class="table-header-title">
+                            <h3>Overdue Books & Defaulter Records</h3>
+                            <span class="badge-count" style="background: #fee2e2; color: #dc2626;" id="overdueCountBadge">0 Overdue</span>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Member Name & ID</th>
+                                    <th>Contact Email</th>
+                                    <th>Book & Issue ID</th>
+                                    <th>Issue Date</th>
+                                    <th>Due Date</th>
+                                    <th>Overdue Duration</th>
+                                    <th>Est. Fine</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="overdueTableBody">
+                                <!-- Populated dynamically by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+
+    <!-- ================= TRANSACTION RECEIPT MODAL ================= -->
+    <div id="receiptModal" class="modal-overlay">
+        <div class="receipt-modal">
+            <div class="receipt-header">
+                <div>
+                    <h3>Digital Library Transaction Receipt</h3>
+                    <p>Official Transaction Record & Loan Slip</p>
+                </div>
+                <button type="button" class="modal-close-btn" onclick="closeReceiptModal()">&times;</button>
+            </div>
+
+            <div class="receipt-body">
+                <div class="receipt-id-row">
+                    <div>
+                        <span class="receipt-label">Transaction Reference</span>
+                        <span class="issue-id-badge" style="font-size: 14px;" id="rIssueId">ISS-0000</span>
+                    </div>
+                    <div style="text-align: right;">
+                        <span class="receipt-label">Generated Date</span>
+                        <strong id="rGeneratedDate" style="color: #1e293b; font-size: 13px;">-</strong>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <span class="receipt-label" style="margin-bottom: 6px;">Current Status</span>
+                    <span id="rStatusBadge" class="status-badge status-issued">Active</span>
+                </div>
+
+                <div class="receipt-grid">
+                    <div class="receipt-box">
+                        <h4>Book Information</h4>
+                        <div class="receipt-item">
+                            <span class="receipt-label">Title</span>
+                            <span class="receipt-val" id="rBookTitle">-</span>
+                        </div>
+                        <div class="receipt-item">
+                            <span class="receipt-label">Author</span>
+                            <span class="receipt-val" id="rBookAuthor">-</span>
+                        </div>
+                        <div class="receipt-item">
+                            <span class="receipt-label">ISBN</span>
+                            <span class="receipt-val" id="rBookIsbn">-</span>
+                        </div>
+                    </div>
+
+                    <div class="receipt-box">
+                        <h4>Borrower Details</h4>
+                        <div class="receipt-item">
+                            <span class="receipt-label">Name</span>
+                            <span class="receipt-val" id="rMemberName">-</span>
+                        </div>
+                        <div class="receipt-item">
+                            <span class="receipt-label">Member ID</span>
+                            <span class="receipt-val" id="rMemberId">-</span>
+                        </div>
+                        <div class="receipt-item">
+                            <span class="receipt-label">Department</span>
+                            <span class="receipt-val" id="rMemberDept">-</span>
+                        </div>
+                        <div class="receipt-item">
+                            <span class="receipt-label">Email</span>
+                            <span class="receipt-val" id="rMemberEmail">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="receipt-timeline">
+                    <div style="font-size: 12px; font-weight: 700; color: #7055e8; text-transform: uppercase; margin-bottom: 10px;">
+                        Loan Timeline (15-Day Policy)
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                        <div>
+                            <span class="receipt-label">Issue Date</span>
+                            <strong id="rIssueDate">-</strong>
+                        </div>
+                        <div>
+                            <span class="receipt-label">Due Date</span>
+                            <strong id="rDueDate">-</strong>
+                        </div>
+                        <div>
+                            <span class="receipt-label">Return Date</span>
+                            <strong id="rReturnDate">-</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="receipt-footer">
+                    <button type="button" class="action-btn secondary-btn" onclick="closeReceiptModal()">Close</button>
+                    <button type="button" class="action-link-btn" onclick="printReceipt()">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                            <rect x="6" y="14" width="12" height="8"></rect>
+                        </svg>
+                        Print Slip
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./report.js"></script>
+</body>
+
+</html>

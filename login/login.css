@@ -1,0 +1,199 @@
+/* ==========================================================
+   Library Management System - login/login.css
+   Sections: 1 Variables | 2 Base | 3 Card | 4 Brand | 5 Header
+             6 Form | 7 Button | 8 Footer | 9 Responsive
+   ========================================================== */
+
+/* 1. VARIABLES */
+:root {
+  --navy: #0a1428;
+  --charcoal: #161d2b;
+  --gold: #e0a43a;
+  --gold-dark: #c78a1f;
+  --white: #ffffff;
+  --muted: #9aa3b5;
+  --border: rgba(255, 255, 255, 0.14);
+  --error: #ff8a80;
+  --success: #6fdc9b;
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", Arial, sans-serif;
+}
+
+/* 2. BASE (image path is relative to THIS css file: login/ -> ../assets) */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  font-family: var(--font-body);
+  color: var(--white);
+  background-image:
+    linear-gradient(rgba(10, 20, 40, 0.88), rgba(10, 20, 40, 0.92)),
+    url("../assets/img/lib.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--navy);
+}
+
+a { color: var(--gold); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* 3. CARD */
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 40px 36px;
+  background: rgba(22, 29, 43, 0.92);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* 4. BRAND */
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 28px;
+  color: var(--white);
+}
+.brand:hover { text-decoration: none; }
+.brand__icon { color: var(--gold); }
+.brand__name {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+}
+.brand__dot { color: var(--gold); }
+
+/* 5. HEADER */
+.auth-header { text-align: center; margin-bottom: 28px; }
+.auth-header__eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.auth-header__title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+.auth-header__text { color: var(--muted); font-size: 0.95rem; }
+
+/* 6. FORM */
+.field { margin-bottom: 20px; }
+
+.field label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.field input {
+  width: 100%;
+  padding: 13px 14px;
+  font: inherit;
+  color: var(--white);
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.field input::placeholder { color: var(--muted); }
+.field input:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 0 3px rgba(224, 164, 58, 0.3); }
+.field input[aria-invalid="true"] { border-color: var(--error); }
+
+.field__password { position: relative; }
+.field__password input { padding-right: 70px; }
+
+.field__toggle {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  padding: 6px 10px;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gold);
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.field__toggle:hover { background: rgba(224, 164, 58, 0.12); }
+
+.field__error {
+  min-height: 0;
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: var(--error);
+}
+.field__error:empty { display: none; }
+
+.form-message {
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.form-message:empty { display: none; }
+.form-message--error { color: var(--error); }
+.form-message--success { color: var(--success); }
+
+/* 7. SUBMIT BUTTON */
+.btn-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--navy);
+  background: var(--gold);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.btn-submit:hover:not(:disabled) {
+  background: var(--gold-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(224, 164, 58, 0.35);
+}
+.btn-submit:disabled { opacity: 0.65; cursor: not-allowed; }
+
+/* 8. FOOTER */
+.auth-footer {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* 9. RESPONSIVE */
+@media (max-width: 480px) {
+  body { padding: 16px; }
+  .auth-card { padding: 28px 20px; }
+  .auth-header__title { font-size: 1.7rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

@@ -1,0 +1,233 @@
+/* ==========================================================
+   Library Management System - index/index.css
+   Sections: 1 Variables | 2 Reset | 3 Navbar | 4 Buttons
+             5 Hero | 6 Info sections | 7 Footer | 8 Responsive
+   ========================================================== */
+
+/* 1. VARIABLES */
+:root {
+  --navy: #0a1428;
+  --gold: #e0a43a;
+  --gold-dark: #c78a1f;
+  --white: #ffffff;
+  --white-soft: rgba(255, 255, 255, 0.85);
+  --nav-bg: rgba(10, 20, 40, 0.75);
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", Arial, sans-serif;
+  --nav-height: 70px;
+}
+
+/* 2. RESET & BASE */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
+
+body {
+  font-family: var(--font-body);
+  color: var(--white);
+  background: var(--navy);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* 3. NAVBAR */
+.site-header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 100;
+  background: var(--nav-bg);
+  backdrop-filter: blur(8px);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--nav-height);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.navbar__brand {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.navbar__brand span { color: var(--gold); }
+
+.navbar__menu {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.navbar__link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.3s, border-color 0.3s;
+}
+.navbar__link:hover { color: var(--gold); border-color: var(--gold); }
+
+/* Hamburger button (hidden on desktop) */
+.navbar__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+.navbar__bar {
+  width: 26px; height: 3px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.navbar__toggle.is-open .navbar__bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.navbar__toggle.is-open .navbar__bar:nth-child(2) { opacity: 0; }
+.navbar__toggle.is-open .navbar__bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* 4. BUTTONS (styled anchors) */
+.btn {
+  display: inline-block;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  transition: background 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.btn--outline {
+  padding: 10px 24px;
+  font-size: 0.85rem;
+  border: 2px solid var(--gold);
+  color: var(--gold);
+}
+.btn--outline:hover { background: var(--gold); color: var(--navy); }
+
+.btn--primary {
+  padding: 16px 40px;
+  font-size: 1rem;
+  background: var(--gold);
+  color: var(--navy);
+  box-shadow: 0 6px 20px rgba(224, 164, 58, 0.35);
+}
+.btn--primary:hover {
+  background: var(--gold-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(224, 164, 58, 0.5);
+}
+
+/* 5. HERO */
+.hero {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: calc(var(--nav-height) + 40px) 24px 60px;
+  /* Overlay first, image second. Path is relative to THIS css file. */
+  background-image:
+    linear-gradient(to right, rgba(10, 20, 40, 0.92), rgba(10, 20, 40, 0.55)),
+    url("./assets/img/lib.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero__content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 7vw, 4.8rem);
+  line-height: 1.1;
+  margin-bottom: 24px;
+  animation: fadeUp 0.9s ease both;
+}
+
+.hero__text {
+  max-width: 540px;
+  font-size: 1.1rem;
+  color: var(--white-soft);
+  margin-bottom: 36px;
+  animation: fadeUp 0.9s ease 0.2s both;
+}
+
+.hero .btn { animation: fadeUp 0.9s ease 0.4s both; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 6. INFO SECTIONS (anchor targets) */
+.info {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 64px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.info h2 {
+  font-family: var(--font-heading);
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.info p { max-width: 640px; color: var(--white-soft); }
+
+/* 7. FOOTER */
+.site-footer {
+  text-align: center;
+  padding: 24px;
+  font-size: 0.85rem;
+  color: var(--white-soft);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* 8. RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar__toggle { display: flex; }
+
+  .navbar__menu {
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+    padding: 28px 24px;
+    background: rgba(10, 20, 40, 0.97);
+    display: none;
+  }
+  .navbar__menu.is-open { display: flex; }
+
+  .hero { text-align: center; background-position: 60% center; }
+  .hero__text { margin-left: auto; margin-right: auto; font-size: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .navbar { padding: 0 16px; }
+  .btn--primary { padding: 14px 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

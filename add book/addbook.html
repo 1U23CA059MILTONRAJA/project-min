@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Management | Digital Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="addbook.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+      <a href="../dashboard/dash.html" class="navbar__brand">Digital <span>Library</span></a>
+
+      <button class="navbar__toggle" id="menuToggle" type="button"
+              aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
+        <span class="navbar__bar"></span>
+        <span class="navbar__bar"></span>
+        <span class="navbar__bar"></span>
+      </button>
+
+      <ul class="navbar__menu" id="navMenu">
+        <li><a href="../dashboard/dash.html" class="navbar__link">Dashboard</a></li>
+        <li><a href="../add book/addbook.html" class="navbar__link is-active" aria-current="page">Books</a></li>
+        <li><a href="../add member/addmember.html" class="navbar__link">Members</a></li>
+        <li><a href="../issuebooks/issue.html" class="navbar__link">Issue Book</a></li>
+        <li><a href="../returnbook/return.html" class="navbar__link">Return Book</a></li>
+        <li><a href="../report/report.html" class="navbar__link">Reports</a></li>
+        <li><a href="../about/about.html" class="navbar__link">About</a></li>
+        <li><a href="../login/login.html" id="logoutLink" class="navbar__logout">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="page">
+
+    <section class="page-head">
+      <h1 class="page-head__title">Book Management</h1>
+      <p class="page-head__text">Add, update and organise the books in your library catalogue.</p>
+    </section>
+
+    <!-- Statistics -->
+    <section class="stats" aria-label="Book statistics">
+      <article class="stat-card">
+        <p class="stat-card__label">Total Book Titles</p>
+        <p class="stat-card__value" id="statTitles">0</p>
+      </article>
+      <article class="stat-card">
+        <p class="stat-card__label">Total Available Copies</p>
+        <p class="stat-card__value" id="statCopies">0</p>
+      </article>
+      <article class="stat-card">
+        <p class="stat-card__label">Number of Categories</p>
+        <p class="stat-card__value" id="statCategories">0</p>
+      </article>
+    </section>
+
+    <!-- Add / Edit form -->
+    <section class="card" aria-labelledby="formTitle">
+      <h2 class="card__title" id="formTitle">Add New Book</h2>
+
+      <form id="bookForm" novalidate>
+        <div class="form-grid">
+
+          <div class="field">
+            <label for="bookId">Book ID <span class="field__required" aria-hidden="true">*</span></label>
+            <input type="text" id="bookId" name="bookId" maxlength="20" placeholder="e.g. B001"
+                   aria-describedby="bookIdError" autocomplete="off">
+            <p class="field__error" id="bookIdError"></p>
+          </div>
+
+          <div class="field">
+            <label for="bookName">Book name <span class="field__required" aria-hidden="true">*</span></label>
+            <input type="text" id="bookName" name="bookName" maxlength="100" placeholder="e.g. Clean Code"
+                   aria-describedby="bookNameError" autocomplete="off">
+            <p class="field__error" id="bookNameError"></p>
+          </div>
+
+          <div class="field">
+            <label for="author">Author name <span class="field__required" aria-hidden="true">*</span></label>
+            <input type="text" id="author" name="author" maxlength="60" placeholder="e.g. Robert C. Martin"
+                   aria-describedby="authorError" autocomplete="off">
+            <p class="field__error" id="authorError"></p>
+          </div>
+
+          <div class="field">
+            <label for="category">Category <span class="field__required" aria-hidden="true">*</span></label>
+            <select id="category" name="category" aria-describedby="categoryError">
+              <option value="">Select a category</option>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Programming">Programming</option>
+              <option value="Mathematics">Mathematics</option>
+              <option value="Science">Science</option>
+              <option value="Engineering">Engineering</option>
+              <option value="Business">Business</option>
+              <option value="History">History</option>
+              <option value="Fiction">Fiction</option>
+              <option value="Non-Fiction">Non-Fiction</option>
+              <option value="Other">Other</option>
+            </select>
+            <p class="field__error" id="categoryError"></p>
+          </div>
+
+          <div class="field">
+            <label for="publisher">Publisher <span class="field__hint">(optional)</span></label>
+            <input type="text" id="publisher" name="publisher" maxlength="60" placeholder="e.g. Prentice Hall"
+                   autocomplete="off">
+          </div>
+
+          <div class="field">
+            <label for="year">Publication year <span class="field__hint">(optional)</span></label>
+            <input type="number" id="year" name="year" min="1000" step="1" inputmode="numeric"
+                   placeholder="e.g. 2008" aria-describedby="yearError">
+            <p class="field__error" id="yearError"></p>
+          </div>
+
+          <div class="field">
+            <label for="quantity">Quantity <span class="field__required" aria-hidden="true">*</span></label>
+            <input type="number" id="quantity" name="quantity" min="1" step="1" inputmode="numeric"
+                   placeholder="Number of copies" aria-describedby="quantityError">
+            <p class="field__error" id="quantityError"></p>
+          </div>
+
+        </div>
+
+        <div id="formMessage" class="message" aria-live="polite"></div>
+
+        <div class="form-actions">
+          <button type="submit" id="submitBtn" class="btn btn--primary">Add Book</button>
+          <button type="button" id="cancelEditBtn" class="btn btn--ghost" hidden>Cancel Edit</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Book list -->
+    <section class="card" aria-labelledby="listTitle">
+      <div class="card__header">
+        <h2 class="card__title" id="listTitle">Book List</h2>
+        <button type="button" id="clearAllBtn" class="btn btn--danger">Clear All Books</button>
+      </div>
+
+      <div class="toolbar">
+        <div class="field">
+          <label for="searchInput">Search books</label>
+          <input type="search" id="searchInput" placeholder="Search by ID, name or author" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="categoryFilter">Filter by category</label>
+          <select id="categoryFilter">
+            <option value="">All categories</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="listMessage" class="message" aria-live="polite"></div>
+      <p class="result-count" id="resultCount" aria-live="polite"></p>
+
+      <div class="table-wrap">
+        <table class="book-table">
+          <thead>
+            <tr>
+              <th scope="col">Book ID</th>
+              <th scope="col">Book Name</th>
+              <th scope="col">Author</th>
+              <th scope="col">Category</th>
+              <th scope="col">Publisher</th>
+              <th scope="col">Publication Year</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="bookTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="addbook.js"></script>
+</body>
+</html>

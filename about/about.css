@@ -1,0 +1,432 @@
+/* RESET */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: #ffffff;
+
+    background:
+        linear-gradient(rgba(5, 15, 35, 0.92), rgba(5, 15, 35, 0.96)),
+        url("../assets/img/lib.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    min-height: 100vh;
+}
+
+
+/* NAVIGATION */
+
+.site-header {
+    width: 100%;
+    background: rgba(10, 20, 40, 0.85);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar {
+    max-width: 1250px;
+    margin: auto;
+    padding: 18px 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar__brand {
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar__menu {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.navbar__link {
+    text-decoration: none;
+    color: #cbd5e1;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.navbar__link:hover,
+.navbar__link.active {
+    color: #60a5fa;
+}
+
+.navbar__logout {
+    background: #2563eb;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.navbar__logout:hover {
+    background: #1d4ed8;
+}
+
+.navbar__toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+
+/* MAIN CONTAINER */
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px 25px;
+}
+
+
+/* HERO SECTION */
+
+.hero {
+    text-align: center;
+    padding: 85px 20px;
+}
+
+.tag,
+.section-label {
+    display: inline-block;
+    color: #60a5fa;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(35px, 5vw, 58px);
+    line-height: 1.2;
+    margin-bottom: 22px;
+}
+
+.hero h1 span {
+    color: #60a5fa;
+}
+
+.hero p {
+    max-width: 720px;
+    margin: auto;
+    color: #cbd5e1;
+    line-height: 1.9;
+    font-size: 15px;
+}
+
+
+/* ABOUT SECTION */
+
+.about-section {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 35px;
+    align-items: center;
+    margin: 40px 0 90px;
+}
+
+.about-content,
+.about-card,
+.feature-card,
+.mission-card,
+.technology {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    backdrop-filter: blur(15px);
+    border-radius: 18px;
+}
+
+.about-content {
+    padding: 35px;
+}
+
+.about-content h2,
+.section-heading h2,
+.technology h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.about-content p {
+    color: #cbd5e1;
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 15px;
+}
+
+.about-card {
+    padding: 45px 30px;
+    text-align: center;
+}
+
+.book-icon {
+    font-size: 75px;
+    margin-bottom: 20px;
+}
+
+.about-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.about-card p {
+    color: #cbd5e1;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+
+/* FEATURES */
+
+.features {
+    margin-bottom: 90px;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-heading p,
+.technology > p {
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.feature-card {
+    padding: 30px;
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-7px);
+    border-color: #3b82f6;
+    background: rgba(59, 130, 246, 0.12);
+}
+
+.feature-icon {
+    font-size: 35px;
+    margin-bottom: 18px;
+}
+
+.feature-card h3 {
+    font-size: 17px;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: #cbd5e1;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+
+/* MISSION AND VISION */
+
+.mission-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 90px;
+}
+
+.mission-card {
+    padding: 35px;
+}
+
+.mission-card h2 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 15px;
+}
+
+.mission-card p {
+    color: #cbd5e1;
+    line-height: 1.9;
+    font-size: 14px;
+}
+
+
+/* TECHNOLOGY */
+
+.technology {
+    text-align: center;
+    padding: 45px 25px;
+    margin-bottom: 70px;
+}
+
+.technology h2 {
+    margin-bottom: 15px;
+}
+
+.tech-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.tech-list span {
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(96, 165, 250, 0.35);
+    color: #93c5fd;
+
+    padding: 12px 22px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* FOOTER */
+
+.footer {
+    text-align: center;
+    padding: 35px 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.13);
+}
+
+.footer h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 12px;
+}
+
+.footer p {
+    color: #94a3b8;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.copyright {
+    margin-top: 18px;
+}
+
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 900px) {
+
+    .navbar__toggle {
+        display: block;
+    }
+
+    .navbar__menu {
+        display: none;
+        position: absolute;
+        top: 65px;
+        left: 0;
+        width: 100%;
+
+        background: #0a1428;
+        padding: 25px;
+
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar__menu.is-open {
+        display: flex;
+    }
+
+    .about-section {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 20px 15px;
+    }
+
+    .hero {
+        padding: 55px 10px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mission-section {
+        grid-template-columns: 1fr;
+    }
+
+    .about-content,
+    .about-card,
+    .mission-card {
+        padding: 25px;
+    }
+
+    .navbar {
+        padding: 16px;
+    }
+
+}
+
+
+/* PRINT */
+
+@media print {
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .site-header {
+        display: none;
+    }
+
+    .about-content,
+    .about-card,
+    .feature-card,
+    .mission-card,
+    .technology {
+        background: white;
+        color: black;
+        border: 1px solid #ddd;
+        backdrop-filter: none;
+    }
+
+    p {
+        color: #333 !important;
+    }
+
+}

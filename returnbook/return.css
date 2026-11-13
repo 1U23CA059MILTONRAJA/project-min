@@ -1,0 +1,444 @@
+/* ==========================================================
+   Return Book & Reports - Dark navy and gold theme
+   (same look as the Issue Book page)
+   Colours are variables in section 1: change them in one place.
+   ========================================================== */
+
+/* =========================
+   1. COLOUR VARIABLES
+========================= */
+
+:root {
+    --navy: #0a1428;
+    --charcoal: #161d2b;
+    --gold: #e0a43a;
+    --gold-dark: #c78a1f;
+    --white: #ffffff;
+    --text: #e6eaf2;
+    --muted: #9aa3b5;
+    --border: rgba(255, 255, 255, 0.14);
+    --error: #ff8a80;
+    --success: #6fdc9b;
+}
+
+
+/* =========================
+   2. BASE
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================
+   3. NAVBAR
+========================= */
+
+.navbar {
+    width: 100%;
+    min-height: 75px;
+    background: var(--charcoal);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    padding: 15px 5%;
+    border-bottom: 3px solid var(--gold);
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.35);
+}
+
+.logo {
+    color: var(--gold);
+    font-size: 22px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 12px;
+    border-radius: 7px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background: rgba(224, 164, 58, 0.18);
+    color: var(--gold);
+}
+
+.nav-links a.logout-link {
+    color: var(--gold);
+    border: 1.5px solid var(--gold);
+    font-weight: bold;
+    margin-left: 6px;
+}
+
+.nav-links a.logout-link:hover {
+    background: var(--gold);
+    color: var(--navy);
+}
+
+
+/* =========================
+   4. MAIN CONTAINER
+========================= */
+
+.container {
+    width: 90%;
+    max-width: 1250px;
+    margin: 35px auto;
+    flex: 1;
+}
+
+
+/* =========================
+   5. PAGE HEADING
+========================= */
+
+.page-heading {
+    margin-bottom: 24px;
+}
+
+.subtitle {
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.page-heading h1 {
+    color: var(--white);
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.description {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.section-title {
+    color: var(--white);
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   6. MESSAGE (return.js sets the class to "success" or "error")
+========================= */
+
+#message {
+    margin-bottom: 20px;
+    padding: 12px 15px;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+#message:empty {
+    display: none;
+}
+
+#message.success {
+    background: rgba(111, 220, 155, 0.12);
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+#message.error {
+    background: rgba(255, 138, 128, 0.12);
+    color: var(--error);
+    border: 1px solid var(--error);
+}
+
+
+/* =========================
+   7. CARD
+========================= */
+
+.card {
+    background: var(--charcoal);
+    padding: 28px;
+    border-radius: 14px;
+    margin-bottom: 40px;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.card-heading {
+    margin-bottom: 22px;
+}
+
+.card-heading h2 {
+    color: var(--white);
+    font-size: 21px;
+    margin-bottom: 8px;
+}
+
+.card-heading p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   8. TABLE
+========================= */
+
+.table-box {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+table {
+    width: 100%;
+    min-width: 800px;
+    border-collapse: collapse;
+}
+
+thead {
+    background: var(--gold);
+}
+
+th {
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: bold;
+    text-align: left;
+    padding: 16px 14px;
+    white-space: nowrap;
+}
+
+td {
+    padding: 15px 14px;
+    font-size: 13px;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+    overflow-wrap: anywhere;        /* long names wrap instead of stretching the table */
+}
+
+tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+tbody tr:hover {
+    background: rgba(224, 164, 58, 0.08);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* "No issued books found." row */
+tbody td[colspan="7"] {
+    text-align: center;
+    padding: 30px;
+    color: var(--muted);
+}
+
+/* Return button inside the table */
+table button {
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+table button:hover:not(:disabled) {
+    background: var(--gold-dark);
+    transform: translateY(-1px);
+}
+
+/* The grey button shown for books that are already returned */
+table button:disabled {
+    background: transparent;
+    color: var(--success);
+    border: 1px solid var(--success);
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   9. LIBRARY REPORTS
+========================= */
+
+.report-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.report-card {
+    background: var(--charcoal);
+    padding: 28px 20px;
+    border-radius: 14px;
+    text-align: center;
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--gold);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    transition: 0.3s;
+}
+
+.report-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+.report-card h3 {
+    color: var(--muted);
+    font-size: 16px;
+    margin-bottom: 14px;
+}
+
+.report-card p {
+    color: var(--gold);
+    font-size: 36px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   10. KEYBOARD FOCUS
+========================= */
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+}
+
+
+/* =========================
+   11. FOOTER
+========================= */
+
+footer {
+    background: var(--charcoal);
+    color: var(--muted);
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid var(--border);
+}
+
+footer p {
+    font-size: 13px;
+}
+
+
+/* =========================
+   12. RESPONSIVE DESIGN
+========================= */
+
+/* Tablet */
+@media (max-width: 1000px) {
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .container {
+        width: 94%;
+    }
+
+    .report-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .navbar {
+        padding: 18px 15px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .nav-links {
+        gap: 5px;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .container {
+        width: 92%;
+        margin: 25px auto;
+    }
+
+    .page-heading h1 {
+        font-size: 26px;
+    }
+
+    .description {
+        font-size: 14px;
+    }
+
+    .section-title {
+        font-size: 21px;
+    }
+
+    .card {
+        padding: 18px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+
+    .report-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .report-card {
+        padding: 24px 20px;
+    }
+
+    .report-card p {
+        font-size: 32px;
+    }
+
+    footer p {
+        font-size: 12px;
+    }
+}

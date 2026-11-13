@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Library Management System - discover books and manage your library in one place.">
+  <title>Library Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+      <a href="index.html" class="navbar__brand">Library<span>MI</span></a>
+
+      <button class="navbar__toggle" id="menuToggle" type="button"
+              aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
+        <span class="navbar__bar"></span>
+        <span class="navbar__bar"></span>
+        <span class="navbar__bar"></span>
+      </button>
+
+     
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero__content">
+        <h1 class="hero__title">Discover a World<br>of Knowledge</h1>
+        <p class="hero__text">
+          Explore a world of knowledge, discover your next favorite book,
+          and manage your library experience in one place.
+        </p>
+        <a href="login/login.html" class="btn btn--primary">Get Started</a>
+      </div>
+    </section>
+
+    <section class="info" id="books">
+      <h2>Books</h2>
+      <p>The book catalogue will be added here once the books module is built. Members will be able to browse and search titles.</p>
+    </section>
+
+    <section class="info" id="members">
+      <h2>Members</h2>
+      <p>Member management is planned for a later stage. After login, librarians will be able to register and manage members.</p>
+    </section>
+
+    <section class="info" id="about">
+      <h2>About</h2>
+      <p>This Library Management System is an MCA first-year project built with HTML, CSS and JavaScript.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p> 2026 Library Management System</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

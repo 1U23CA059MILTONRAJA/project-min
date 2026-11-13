@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Digital Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dash.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+      <a href="dash.html" class="navbar__brand">Digital <span>Library</span></a>
+
+      <button class="navbar__toggle" id="menuToggle" type="button"
+              aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
+        <span class="navbar__bar"></span>
+        <span class="navbar__bar"></span>
+        <span class="navbar__bar"></span>
+      </button>
+
+        <ul class="navbar__menu" id="navMenu">
+        <li><a href="../add book/addbook.html" class="navbar__link is-active" aria-current="page">Books</a></li>
+        <li><a href="../add member/addmember.html" class="navbar__link">Members</a></li>
+        <li><a href="../issuebooks/issue.html" class="navbar__link">Issue Book</a></li>
+        <li><a href="../returnbook/return.html" class="navbar__link">Return Book</a></li>
+        <li><a href="../report/report.html" class="navbar__link">Reports</a></li>
+        <li><a href="../about/about.html" class="navbar__link">About</a></li>
+        <li><a href="../login/login.html" id="logoutLink" class="navbar__logout">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="page">
+
+    <section class="welcome" aria-labelledby="welcomeTitle">
+      <p class="welcome__eyebrow">Library overview</p>
+      <h1 class="welcome__title" id="welcomeTitle">Welcome to Digital Library</h1>
+      <p class="welcome__text">Manage your library efficiently and effortlessly.</p>
+      <p class="welcome__user" id="welcomeUser" hidden></p>
+    </section>
+
+    <section class="stats" aria-label="Library statistics">
+      <article class="stat-card">
+        <span class="stat-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>
+        </span>
+        <div>
+          <p class="stat-card__label">Total Books</p>
+          <p class="stat-card__value" id="totalBooks">–</p>
+        </div>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </span>
+        <div>
+          <p class="stat-card__label">Total Members</p>
+          <p class="stat-card__value" id="totalMembers">–</p>
+        </div>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        </span>
+        <div>
+          <p class="stat-card__label">Books Issued</p>
+          <p class="stat-card__value" id="issuedBooks">–</p>
+        </div>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg>
+        </span>
+        <div>
+          <p class="stat-card__label">Books Returned</p>
+          <p class="stat-card__value" id="returnedBooks">–</p>
+        </div>
+      </article>
+    </section>
+
+    <div class="panels">
+      <section class="panel panel--activity" aria-labelledby="activityTitle">
+        <div class="panel__header">
+          <h2 class="panel__title" id="activityTitle">Recent Library Activity</h2>
+        </div>
+        <ul class="item-list" id="activityList"></ul>
+      </section>
+
+      <section class="panel" aria-labelledby="booksTitle">
+        <div class="panel__header">
+          <h2 class="panel__title" id="booksTitle">Recently Added Books</h2>
+          <a class="panel__link" href="../add book/addbook.html">View all books</a>
+        </div>
+        <ul class="item-list" id="recentBooks"></ul>
+      </section>
+
+      <section class="panel" aria-labelledby="returnsTitle">
+        <div class="panel__header">
+          <h2 class="panel__title" id="returnsTitle">Recently Returned Books</h2>
+        </div>
+        <ul class="item-list" id="recentReturns"></ul>
+      </section>
+    </div>
+
+  </main>
+
+  <script>
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+      window.location.replace("../login/login.html");
+    }
+
+    document.getElementById("logoutBtn").addEventListener("click", function () {
+      localStorage.removeItem("isLoggedIn");
+    });
+  </script>
+
+  <script src="dash.js"></script>
+</body>
+</html>
